@@ -11,3 +11,10 @@ It contains a list of classes:
     People : Class used to create the people
 
     Robots's behaviour : Class used to create the robots's behaviour
+
+    File : Class used to create the file
+
+And we create a demo file to test some functions
+
+[]: # Language: python
+[]: # Path: demo.py
