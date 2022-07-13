@@ -1,4 +1,4 @@
-
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget , QApplication  , QPushButton  , QDesktopWidget
 from Map import Map
 
@@ -16,26 +16,31 @@ class Window(QWidget):
         self.width = self.desktop.width()
         self.height = self.desktop.height()
         self.setFixedSize(self.width*0.6, self.height*0.8)
+        self.setWindowTitle("Cleaner Robots'behavior Display")
+
 
         #paint the road
         self.baseRoad = Map(self.width , self.height)
         self.baseRoad.setParent(self)
         self.baseRoad.move(0, 0)
         self.baseRoad.resize(self.height*0.8, self.height*0.8)
+        #Qt.setAlignment(Qt.AlignCenter)
+        self.baseRoad.setText("This is the Map\n"
+                              "You need to Create a Map that you want to use \n "
+                              "Then press the Create button to show your Map")
+        self.baseRoad.setStyleSheet("QLabel{font-size: 32px;font-weight: bold}")
+        self.baseRoad.setAlignment(Qt.AlignCenter)
 
         # self.baseRoad.setStyleSheet("QLabel{background-color: #ff0000;}")
-
+        #The button to start the program
         self.startButton = QPushButton('Start')
         self.startButton.setParent(self)
         self.startButton.move(self.width*0.475, self.height*0.65)
         self.startButton.resize(self.width*0.1, self.height*0.1)
         #self.startButton.setStyleSheet("QPushButton{background-color: #ff0000;}")
 
-        self.setWindowTitle("Cleaner Robots'behavior Display")
         self.center()
-
         self.show()
-
 
     #center the window
     def center(self):
@@ -48,6 +53,7 @@ class Window(QWidget):
         self.startButton.clicked.connect(self.paintMap)
 
     def paintMap(self):
+        self.baseRoad.setText("")
         self.baseRoad.paintFirstMap(self.baseRoad.data)
         self.startButton.clicked.disconnect(self.paintMap)
         self.startButton.clicked.connect(self.test)

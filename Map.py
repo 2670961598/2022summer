@@ -5,6 +5,11 @@ import random
 
 class Map(QLabel):
 
+    enter = []
+    leave = []
+    press = []
+    move  = []
+
     def __init__(self):
         super().__init__()
         self.baseMap = None
@@ -13,30 +18,19 @@ class Map(QLabel):
 
     def __init__(self,  width , height):
         super().__init__()
+
         self.width = width
         self.height = height
         self.baseMap = None
         self.data = read_file("data.csv",method="CSV")
-        self.initUI()
-
-    def initUI(self):
-        pass
-        # self.label = QLabel(self)
-        # self.label.move(0, 0)
-        # self.label.resize(self.height()*0.1, self.height()*0.1)
-        # self.label.setStyleSheet("QLabel{background-color: #00ff00;}")
 
     def paintFirstMap(self ,*args):
 
-        # self.baseMap = [ [Road(self ,i , j) for i in range(map)] for j in range(map) ]
-        # for i in range(map):
-        #     for j in range(map):
-        #         self.baseMap[i][j].move(i*self.height*(0.8/map), j*self.height*(0.8/map))
-        #         self.baseMap[i][j].resize(self.height*(0.8/map), self.height*(0.8/map))
-        #         self.baseMap[i][j].setStyleSheet("QLabel{background-color: #"
-        #                                  + str(hex(random.randint(0, 255))[2:].upper())
-        #                                  + str(hex(random.randint(0, 255))[2:].upper())
-        #                                  + str(hex(random.randint(0, 255))[2:].upper()) + ";}")\
+        '''
+        This function is mainly for painting the map
+        accept the data from the file and paint the map by the data from the file
+        '''
+
         self.baseTuple = np.array(args[0])
         print(self.baseTuple)
         if self.baseTuple.shape[0] > self.baseTuple.shape[1]:
