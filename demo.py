@@ -1,7 +1,7 @@
 import random
 # 6724  6889
-row = 82
-col = 82
+row = 8
+col = 8
 with open("data.csv", "w") as f:
     f.write("\n")
     for i in range(row):

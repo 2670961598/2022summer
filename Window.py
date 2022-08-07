@@ -1,5 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget , QApplication  , QPushButton  , QDesktopWidget
+from PyQt5.QtGui import QIcon
 from Map import Map
 
 #create a new windows by PyQt5
@@ -17,12 +18,13 @@ class Window(QWidget):
         self.height = self.desktop.height()
         self.setFixedSize(self.width*0.6, self.height*0.8)
         self.setWindowTitle("Cleaner Robots'behavior Display")
+        self.setWindowIcon(QIcon('./Image/Icon.png'))
 
 
         #paint the road
         self.baseRoad = Map(self.width , self.height)
         self.baseRoad.setParent(self)
-        self.baseRoad.move(0, 0)
+        #self.baseRoad.move(0, 0)
         self.baseRoad.resize(self.height*0.8, self.height*0.8)
         #Qt.setAlignment(Qt.AlignCenter)
         self.baseRoad.setText("This is the Map\n"
@@ -39,6 +41,11 @@ class Window(QWidget):
         self.startButton.resize(self.width*0.1, self.height*0.1)
         #self.startButton.setStyleSheet("QPushButton{background-color: #ff0000;}")
 
+        self.paintButton = QPushButton('Paint')
+        self.paintButton.setParent(self)
+        self.paintButton.move(self.width*0.475, self.height*0.35)
+        self.paintButton.resize(self.width*0.1, self.height*0.1)
+
         self.center()
         self.show()
 
@@ -50,13 +57,13 @@ class Window(QWidget):
         self.move(qr.topLeft())
 
     def connectAction(self):
-        self.startButton.clicked.connect(self.paintMap)
+        self.paintButton.clicked.connect(self.paintMap)
 
     def paintMap(self):
         self.baseRoad.setText("")
         self.baseRoad.paintFirstMap(self.baseRoad.data)
-        self.startButton.clicked.disconnect(self.paintMap)
-        self.startButton.clicked.connect(self.test)
+        self.paintButton.clicked.disconnect(self.paintMap)
+        self.paintButton.clicked.connect(self.test)
 
     def test(self):
         print(1)
